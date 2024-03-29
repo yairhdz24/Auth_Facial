@@ -19,10 +19,10 @@ function Protected() {
   }
 
   return (
-    <div className="bg-white pt-40 md:pt-60">
+    <div className="bg-white pt-40 md:pt-60 h-screen">
       <div className="mx-auto max-w-7xl">
         <h2 className="text-center text-3xl font-extrabold tracking-tight text-gray-900 sm:text-4xl mb-12">
-          You have successfully logged in!
+          ¡Has iniciado sesión correctamente!
         </h2>
         <div className="text-center mb-24">
           <img
@@ -31,9 +31,9 @@ function Protected() {
               account?.type === "CUSTOM"
                 ? account.picture
                 : // : import.meta.env.DEV
-                  // ? `/temp-accounts/${account.picture}`
-                  // : `/react-face-auth/temp-accounts/${account.picture}`
-                  `/temp-accounts/${account.picture}`
+                // ? `/temp-accounts/${account.picture}`
+                // : `/react-face-auth/temp-accounts/${account.picture}`
+                `/temp-accounts/${account.picture}`
             }
             alt={account.fullName}
           />
@@ -50,9 +50,10 @@ function Protected() {
               localStorage.removeItem("faceAuth");
               navigate("/");
             }}
-            className="flex gap-2 mt-12 w-fit mx-auto cursor-pointer z-10 py-3 px-6 rounded-full bg-gradient-to-r from-red-400 to-red-600"
+            className="flex gap-2 mt-12 w-fit mx-auto cursor-pointer z-10 py-3 px-6 rounded-full bg-gradient-to-r from-red-400 to-red-600 
+            hover:bg-opacity-80 hover:shadow-lg hover:scale-105 transform transition duration-300"
           >
-            <span className="text-white">Log Out</span>
+            <span className="text-white">Cerrar Sesión </span>
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
