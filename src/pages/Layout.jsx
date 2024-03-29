@@ -17,9 +17,9 @@ function Layout() {
   }
 
   return (
-    <div className="h-screen flex flex-col justify-between">
+    <div className="h-90 flex flex-col justify-between">
       <Outlet className="grow" />
-      <Footer />
+      {/* <Footer /> */}
     </div>
   );
 }
