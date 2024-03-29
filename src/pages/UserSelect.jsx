@@ -2,18 +2,10 @@ import React, { useState } from "react";
 import User from "../components/User";
 import { RadioGroup } from "@headlessui/react";
 import { Link } from "react-router-dom";
+import ParticlesComponent from "../components/particles";
 
 const accounts = [
-  {
-    id: "374ed1e4-481b-4074-a26e-6137657c6e35",
-    fullName: "Bilal Gümüş",
-    picture: "374ed1e4-481b-4074-a26e-6137657c6e35/1.jpg",
-  },
-  {
-    id: "43332f46-89a4-435c-880e-4d72bb51149a",
-    fullName: "Andrew Clark",
-    picture: "43332f46-89a4-435c-880e-4d72bb51149a/1.jpg",
-  },
+
   {
     id: "b8476d8d-bd7e-405f-aa66-9a22a9727930",
     fullName: "Amelia Miller",
@@ -37,7 +29,7 @@ const accounts = [
   {
     id: "ola",
     fullName: "Prueba",
-    picture: "/ola/CARA.jpg",
+    picture: "/ola/Mama.jpg",
   },
 ];
 
@@ -62,133 +54,141 @@ function UserSelect() {
   };
 
   return (
-    <div className="h-full flex flex-col items-center justify-center gap-[24px] w-full max-w-[720px] mx-auto">
-      <h1 className="text-2xl font-semibold">Select a Dummy User to Log In</h1>
-      <div className="w-full p-4 text-right">
-        <div className="mx-auto w-full max-w-md">
-          <RadioGroup value={selected} onChange={setSelected}>
-            <RadioGroup.Label className="sr-only">Server size</RadioGroup.Label>
-            <div className="space-y-2">
-              {accounts.map((account) => (
-                <User key={account.id} user={account} />
-              ))}
-              {customUser && (
-                <div className="relative">
-                  <User key={customUser.id} user={customUser} type="CUSTOM" />
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    strokeWidth={1.5}
-                    stroke="currentColor"
-                    className="text-indigo-800 w-6 h-6 absolute top-1/2 -translate-y-1/2 right-[-32px] cursor-pointer"
-                    onClick={() => {
-                      setCustomUser(null);
-                      selected?.type === "CUSTOM" && setSelected(accounts[0]);
+    <div className="min-h-screen bg-gradient-to-tl from-blue-700 to-indigo-900 flex flex-col items-center justify-center">
+      <div className="h-auto flex flex-col items-center justify-center gap-[24px] w-full max-w-[520px] mx-auto z-10">
+        <ParticlesComponent id="particles-background" />
+        <div className="w-full p-10 text-center bg-white rounded-lg shadow-lg z-10 mt-2 mb-10">
+          <h1 className="text-4xl font-extrabold mb-5 text-black" >
+            Elige un usuario para iniciar sesión
+          </h1>
+
+          <div className="mx-auto w-full max-w-md">
+            <RadioGroup value={selected} onChange={setSelected}>
+              <RadioGroup.Label className="sr-only">Server size</RadioGroup.Label>
+              <div className="space-y-2">
+                {accounts.map((account) => (
+                  <User key={account.id} user={account} />
+                ))}
+                {customUser && (
+                  <div className="relative">
+                    <User key={customUser.id} user={customUser} type="CUSTOM" />
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      strokeWidth={1.5}
+                      stroke="currentColor"
+                      className="text-indigo-800 w-6 h-6 absolute top-1/2 -translate-y-1/2 right-[-32px] cursor-pointer"
+                      onClick={() => {
+                        setCustomUser(null);
+                        selected?.type === "CUSTOM" && setSelected(accounts[0]);
+                      }}
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        d="M6 18L18 6M6 6l12 12"
+                      />
+                    </svg>
+                  </div>
+                )}
+              </div>
+            </RadioGroup>
+            {!customUser && (
+              <div className="flex flex-col items-center justify-center w-full mt-3">
+                <label
+                  htmlFor="dropzone-file"
+                  className="flex flex-col items-center justify-center w-full border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 hover:border-indigo-200 hover:bg-gray-100"
+                >
+                  <div className="flex flex-col items-center justify-center py-4">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      strokeWidth={1.5}
+                      stroke="currentColor"
+                      className="w-6 h-6 text-indigo-500 mb-2"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        d="M12 16.5V9.75m0 0l3 3m-3-3l-3 3M6.75 19.5a4.5 4.5 0 01-1.41-8.775 5.25 5.25 0 0110.233-2.33 3 3 0 013.758 3.848A3.752 3.752 0 0118 19.5H6.75z"
+                      />
+                    </svg>
+                    <p className="font-semibold mb-2 text-sm text-gray-500 dark:text-gray-400">
+                      Haga clic para cargar una imagen
+                    </p>
+                    <p className="text-xs text-gray-500 dark:text-gray-400">
+                      PNG, JPG o JPEG
+                    </p>
+                  </div>
+                  <input
+                    id="dropzone-file"
+                    type="file"
+                    accept=".png, .jpg, .jpeg"
+                    className="hidden"
+                    onChange={async (e) => {
+                      const files = e.target.files;
+                      if (files == null || files.length == 0) {
+                        setErrorMessage("No files wait for import.");
+                        return;
+                      }
+                      let file = files[0];
+                      let name = file.name;
+                      let suffixArr = name.split("."),
+                        suffix = suffixArr[suffixArr.length - 1];
+                      if (
+                        suffix != "png" &&
+                        suffix != "jpg" &&
+                        suffix != "jpeg"
+                      ) {
+                        setErrorMessage("Only support png jpg or jpeg files.");
+                        return;
+                      }
+
+                      const base64 = await convertBase64(file);
+
+                      const user = {
+                        id: "custom",
+                        fullName: name,
+                        type: "CUSTOM",
+                        picture: base64,
+                      };
+
+                      setCustomUser(user);
+                      setSelected(user);
                     }}
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      d="M6 18L18 6M6 6l12 12"
-                    />
-                  </svg>
-                </div>
-              )}
-            </div>
-          </RadioGroup>
-          {!customUser && (
-            <div className="flex flex-col items-center justify-center w-full mt-3">
-              <label
-                htmlFor="dropzone-file"
-                className="flex flex-col items-center justify-center w-full border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 hover:border-indigo-200 hover:bg-gray-100"
+                  />
+                </label>
+                {errorMessage && (
+                  <p className="text-red-500 text-xs mt-2">{errorMessage}</p>
+                )}
+              </div>
+            )}
+            <div className="mt-4 flex justify-end">
+            <Link
+              to="/login"
+              state={{ account: selected }}
+              className="flex items-center rounded-md bg-indigo-500 px-4 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-600 transition-colors duration-300 ease-in-out cursor-pointer"
               >
-                <div className="flex flex-col items-center justify-center py-4">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    strokeWidth={1.5}
-                    stroke="currentColor"
-                    className="w-6 h-6 text-indigo-500 mb-2"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      d="M12 16.5V9.75m0 0l3 3m-3-3l-3 3M6.75 19.5a4.5 4.5 0 01-1.41-8.775 5.25 5.25 0 0110.233-2.33 3 3 0 013.758 3.848A3.752 3.752 0 0118 19.5H6.75z"
-                    />
-                  </svg>
-                  <p className="font-semibold mb-2 text-sm text-gray-500 dark:text-gray-400">
-                    Click to upload referral image
-                  </p>
-                  <p className="text-xs text-gray-500 dark:text-gray-400">
-                    PNG, JPG or JPEG
-                  </p>
-                </div>
-                <input
-                  id="dropzone-file"
-                  type="file"
-                  accept=".png, .jpg, .jpeg"
-                  className="hidden"
-                  onChange={async (e) => {
-                    const files = e.target.files;
-                    if (files == null || files.length == 0) {
-                      setErrorMessage("No files wait for import.");
-                      return;
-                    }
-                    let file = files[0];
-                    let name = file.name;
-                    let suffixArr = name.split("."),
-                      suffix = suffixArr[suffixArr.length - 1];
-                    if (
-                      suffix != "png" &&
-                      suffix != "jpg" &&
-                      suffix != "jpeg"
-                    ) {
-                      setErrorMessage("Only support png jpg or jpeg files.");
-                      return;
-                    }
-
-                    const base64 = await convertBase64(file);
-
-                    const user = {
-                      id: "custom",
-                      fullName: name,
-                      type: "CUSTOM",
-                      picture: base64,
-                    };
-
-                    setCustomUser(user);
-                    setSelected(user);
-                  }}
+              Continue
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                strokeWidth={2}
+                stroke="currentColor"
+                className="ml-1.5 h-5 w-5"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M4.5 12h15m0 0l-6.75-6.75M19.5 12l-6.75 6.75"
                 />
-              </label>
-              {errorMessage && (
-                <p className="text-red-500 text-xs mt-2">{errorMessage}</p>
-              )}
+              </svg>
+            </Link>
             </div>
-          )}
-          <Link
-            to="/login"
-            state={{ account: selected }}
-            className="mt-4 inline-flex items-center rounded-md bg-indigo-500 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-600"
-          >
-            Continue
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              strokeWidth={1.5}
-              stroke="currentColor"
-              className="ml-1.5 h-5 w-5"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M4.5 12h15m0 0l-6.75-6.75M19.5 12l-6.75 6.75"
-              />
-            </svg>
-          </Link>
+          </div>
         </div>
       </div>
     </div>
@@ -196,3 +196,4 @@ function UserSelect() {
 }
 
 export default UserSelect;
+
