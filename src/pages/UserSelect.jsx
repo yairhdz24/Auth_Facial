@@ -29,7 +29,7 @@ const accounts = [
   {
     id: "ola",
     fullName: "Prueba",
-    picture: "/ola/Mama.jpg",
+    picture: "/ola/Jofiel.jpg",
   },
 ];
 
