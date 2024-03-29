@@ -3,8 +3,8 @@ import Logo from "../assets/images/logo.png";
 
 function Footer() {
   return (
-    <h6 className="text-sm text-center w-full z-20">
-      {/* <footer class="bg-gray-900 z-10">
+   
+      <footer class="bg-gray-900 z-10">
         <div class="mx-auto w-full max-w-screen-xl p-4 py-6 lg:py-8">
           <div class="md:flex md:justify-between">
             <div class="mb-6 md:mb-0 flex items-center">
@@ -87,9 +87,8 @@ function Footer() {
             </div>
           </div>
         </div>
-      </footer> */}
-        alksjdlk;
-    </h6>
+      </footer> 
+      
   );
 }
 
