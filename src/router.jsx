@@ -9,6 +9,7 @@ import Login from "./pages/Login";
 import Layout from "./pages/Layout";
 import UserSelect from "./pages/UserSelect";
 import Protected from "./pages/Protected";
+// import UserRegistration from "./pages/UserRegistration"; // Importa el componente UserRegistration
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -18,11 +19,11 @@ const router = createBrowserRouter(
         <Route path="user-select" element={<UserSelect />} />
         <Route path="login" element={<Login />} />
         <Route path="protected" element={<Protected />} />
+        {/* <Route path="register" element={<UserRegistration />} /> Agrega la ruta de UserRegistration */}
         <Route path="*" element={<Navigate to="/" />} />
       </Route>
     </>
   ),
-  // { basename: import.meta.env.DEV ? "/" : "/react-face-auth/" }
   { basename: "/" }
 );
 
