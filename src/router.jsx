@@ -10,7 +10,7 @@ import { Layout } from "./pages/Layout";
 import { UserSelect } from "./pages/UserSelect";
 import { HomePage } from "./pages/HomePage";
 import {Register} from "./pages/Register";
-// import Prueba from "./pages/prueba";
+
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -21,7 +21,6 @@ const router = createBrowserRouter(
         <Route path="login" element={<Login />} />
         <Route path="HomePage" element={<HomePage />} />
         <Route path="register" element={<Register />} /> 
-        {/* <Route path="prueba" element={<Prueba />} />  */}
         <Route path="*" element={<Navigate to="/" />} />
 
       </Route>
