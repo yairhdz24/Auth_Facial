@@ -41,12 +41,10 @@ export const Home = () => {
                 FaceAuthenticator
               </h1>
               <p className="mt-8 text-md text-white max-w-3xl mx-4 md:mx-0 lg:mx-auto bg-gray-800 p-6 rounded-lg">
-                La aplicación de autenticación basada en reconocimiento
-                facial es una aplicación web innovadora desarrollada
-                utilizando React e inteligencia Atificial de Reconocimiento facial.
+                FaceAuthenticator es una aplicación web de autenticación basada en reconocimiento
+                facial, desarrollada utilizando React e inteligencia Atificial de Reconocimiento facial.
                 El principal objetivo de la aplicación es ofrecer un sistema de autenticación
-                confiable y eficiente mediante el análisis y la verificación
-                de las características faciales del usuario.
+                confiable y eficiente mediante el análisis y la verificación de las características faciales del usuario.
               </p>
               <div className="flex gap-4">
                 <Link
