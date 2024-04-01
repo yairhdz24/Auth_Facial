@@ -6,10 +6,11 @@ import {
 } from "react-router-dom";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
-import Layout from "./pages/Layout";
-import UserSelect from "./pages/UserSelect";
-import Protected from "./pages/Protected";
-// import UserRegistration from "./pages/UserRegistration"; // Importa el componente UserRegistration
+import { Layout } from "./pages/Layout";
+import { UserSelect } from "./pages/UserSelect";
+import { HomePage } from "./pages/HomePage";
+import {Register} from "./pages/Register";
+// import Prueba from "./pages/prueba";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -18,9 +19,11 @@ const router = createBrowserRouter(
         <Route path="/" element={<Home />} />
         <Route path="user-select" element={<UserSelect />} />
         <Route path="login" element={<Login />} />
-        <Route path="protected" element={<Protected />} />
-        {/* <Route path="register" element={<UserRegistration />} /> Agrega la ruta de UserRegistration */}
+        <Route path="HomePage" element={<HomePage />} />
+        <Route path="register" element={<Register />} /> 
+        {/* <Route path="prueba" element={<Prueba />} />  */}
         <Route path="*" element={<Navigate to="/" />} />
+
       </Route>
     </>
   ),
