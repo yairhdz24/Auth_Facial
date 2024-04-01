@@ -1,38 +1,27 @@
+import React, { useEffect, useMemo, useState } from "react";
 import Particles, { initParticlesEngine } from "@tsparticles/react";
-import { useEffect, useMemo, useState } from "react";
 import { loadSlim } from "@tsparticles/slim"; 
 
-
-
 const ParticlesComponent = (props) => {
-
+  const [options, setOptions] = useState(null);
   const [init, setInit] = useState(false);
 
   useEffect(() => {
-    initParticlesEngine(async (engine) => {
-      await loadSlim(engine);
-    }).then(() => {
+    const initializeParticles = async () => {
+      await initParticlesEngine(async (engine) => {
+        await loadSlim(engine);
+      });
+
       setInit(true);
-    });
+    };
+
+    initializeParticles();
   }, []);
 
-  const particlesLoaded = (container) => {
-    console.log(container);
-  };
+  useEffect(() => {
+    if (!init) return;
 
-
-  const options = useMemo(
-    () => ({
-      // background: {
-      //   color: {
-      //     value: {
-      //       start: "#178ce3",
-      //       end: "#02dbfb",
-      //       angle: 135
-
-      //     },
-      //   },
-      // },
+    const particlesOptions = {
       fpsLimit: 120,
       interactivity: {
         events: {
@@ -61,7 +50,6 @@ const ParticlesComponent = (props) => {
           opacity: 0.2,
         },
         links: {
-          // color: "#FFFFFF",
           color: "#20a4e8",
           distance: 150,
           enable: true,
@@ -95,12 +83,16 @@ const ParticlesComponent = (props) => {
         },
       },
       detectRetina: true,
-    }),
-    [],
-  );
+    };
 
+    setOptions(particlesOptions);
+  }, [init]);
 
-  return <Particles id={props.id} init={particlesLoaded} options={options} />; 
+  const particlesLoaded = (container) => {
+    console.log(container);
+  };
+
+  return options ? <Particles id={props.id} init={particlesLoaded} options={options} /> : null; 
 };
 
 export default ParticlesComponent;

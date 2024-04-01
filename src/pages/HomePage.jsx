@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
-function Protected() {
+export const HomePage = () => {
   const [account, setAccount] = useState(null);
   const navigate = useNavigate();
 
@@ -10,7 +10,7 @@ function Protected() {
       navigate("/login");
     }
 
-    const { account } = JSON.parse(localStorage.getItem("faceAuth"));
+    const { account } = JSON.parse(localStorage.getItem("faceAuth")); // Obtener la cuenta del usuario
     setAccount(account);
   }, []);
 
@@ -19,22 +19,15 @@ function Protected() {
   }
 
   return (
-    <div className="bg-white pt-40 md:pt-60">
+    <div className="bg-white pt-40 md:pt-60 h-screen">
       <div className="mx-auto max-w-7xl">
         <h2 className="text-center text-3xl font-extrabold tracking-tight text-gray-900 sm:text-4xl mb-12">
-          You have successfully logged in!
+          ¡Has iniciado sesión correctamente!
         </h2>
         <div className="text-center mb-24">
           <img
-            className="mx-auto mb-8 object-cover h-48 w-48 rounded-full"
-            src={
-              account?.type === "CUSTOM"
-                ? account.picture
-                : // : import.meta.env.DEV
-                  // ? `/temp-accounts/${account.picture}`
-                  // : `/react-face-auth/temp-accounts/${account.picture}`
-                  `/temp-accounts/${account.picture}`
-            }
+            className="object-cover h-40 w-40 rounded-full mx-auto mb-6" 
+            src={`https://cfdrkjqgibsxervlmzpr.supabase.co/storage/v1/object/public/images/${account.pictureFileName}`}
             alt={account.fullName}
           />
           <h1
@@ -50,9 +43,10 @@ function Protected() {
               localStorage.removeItem("faceAuth");
               navigate("/");
             }}
-            className="flex gap-2 mt-12 w-fit mx-auto cursor-pointer z-10 py-3 px-6 rounded-full bg-gradient-to-r from-red-400 to-red-600"
+            className="flex gap-2 mt-12 w-fit mx-auto cursor-pointer z-10 py-3 px-6 rounded-full bg-gradient-to-r from-red-400 to-red-600 
+            hover:bg-opacity-80 hover:shadow-lg hover:scale-105 transform transition duration-300"
           >
-            <span className="text-white">Log Out</span>
+            <span className="text-white">Cerrar Sesión </span>
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
@@ -73,5 +67,3 @@ function Protected() {
     </div>
   );
 }
-
-export default Protected;
