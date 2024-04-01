@@ -4,8 +4,8 @@ import {
   createBrowserRouter,
   createRoutesFromElements,
 } from "react-router-dom";
-import Home from "./pages/Home";
-import Login from "./pages/Login";
+import { Home } from "./pages/Home";
+import { Login } from "./pages/Login";
 import { Layout } from "./pages/Layout";
 import { UserSelect } from "./pages/UserSelect";
 import { HomePage } from "./pages/HomePage";
