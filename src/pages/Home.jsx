@@ -5,7 +5,7 @@ import Footer from "../components/Footer";
 import Lottie from "react-lottie";
 import FaceAuth from '../assets/images/FaceScaner.json';
 
-function Home() {
+export const Home = () => {
   return (
     <>
       <div className="flex justify-center items-center h-screen bg-gradient-to-tl from-blue-700 to-indigo-900">
@@ -116,5 +116,3 @@ function Home() {
     </>
   );
 }
-
-export default Home;
