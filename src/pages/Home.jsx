@@ -1,8 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import ParticlesComponent from "../components/particles";
-import AuthImage from "../assets/images/auth.png";
-import Logo from "../assets/images/logo.png";
 import Footer from "../components/Footer";
 import Lottie from "react-lottie";
 import FaceAuth from '../assets/images/FaceScaner.json';
@@ -35,7 +33,7 @@ function Home() {
                 />
               </div>
               {/* <img src={Logo} alt="" className="h-40 mb-2" /> */}
-              <h1 className="text-5xl font-bold text-white mb-5 text-center md:text-left" style={{ textShadow: "3px 4px 8px rgba(0, 0, 0, 0.2)"}}>
+              <h1 className="text-5xl font-bold text-white mb-5 text-center md:text-left" style={{ textShadow: "3px 4px 8px rgba(0, 0, 0, 0.2)" }}>
                 Bienvenido a
               </h1>
               <h1 className="block  text-4xl tracking-tight font-extrabold  sm:text-5xl md:text-6xl bg-clip-text 
@@ -50,65 +48,65 @@ function Home() {
                 confiable y eficiente mediante el análisis y la verificación
                 de las características faciales del usuario.
               </p>
-
-              <Link
-                to={"/user-select"}
-                className="flex gap-2 mt-7 w-fit items-center mx-auto md:mx-0 cursor-pointer z-10 py-3 px-6 rounded-full 
+              <div className="flex gap-4">
+                <Link
+                  to={"/user-select"}
+                  className="flex gap-2 mt-7 w-fit items-center mx-auto md:mx-0 cursor-pointer z-10 py-3 px-6 rounded-full 
              hover:shadow-lg hover:scale-105 transform transition duration-300
              bg-gradient-to-r from-indigo-300 to-indigo-500 hover:bg-opacity-80"
-              >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  strokeWidth={1.5}
-                  stroke="white"
-                  className="w-6 h-6"
                 >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M6.827 6.175A2.31 2.31 0 015.186 7.23c-.38.054-.757.112-1.134.175C2.999 7.58 2.25 8.507 2.25 9.574V18a2.25 2.25 0 002.25 2.25h15A2.25 2.25 0 0021.75 18V9.574c0-1.067-.75-1.994-1.802-2.169a47.865 47.865 0 00-1.134-.175 2.31 2.31 0 01-1.64-1.055l-.822-1.316a2.192 2.192 0 00-1.736-1.039 48.774 48.774 0 00-5.232 0 2.192 2.192 0 00-1.736 1.039l-.821 1.316z"
-                  />
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M16.5 12.75a4.5 4.5 0 11-9 0 4.5 4.5 0 019 0zM18.75 10.5h.008v.008h-.008V10.5z"
-                  />
-                </svg>
-                <span className="text-white">Iniciar Sesion</span>
-              </Link>
+                  {/* <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    strokeWidth={1.5}
+                    stroke="white"
+                    className="w-6 h-6"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="M6.827 6.175A2.31 2.31 0 015.186 7.23c-.38.054-.757.112-1.134.175C2.999 7.58 2.25 8.507 2.25 9.574V18a2.25 2.25 0 002.25 2.25h15A2.25 2.25 0 0021.75 18V9.574c0-1.067-.75-1.994-1.802-2.169a47.865 47.865 0 00-1.134-.175 2.31 2.31 0 01-1.64-1.055l-.822-1.316a2.192 2.192 0 00-1.736-1.039 48.774 48.774 0 00-5.232 0 2.192 2.192 0 00-1.736 1.039l-.821 1.316z"
+                    />
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="M16.5 12.75a4.5 4.5 0 11-9 0 4.5 4.5 0 019 0zM18.75 10.5h.008v.008h-.008V10.5z"
+                    />
+                  </svg> */}
+                  <span className="text-white text-lg font-bold">Iniciar Sesion</span>
+                </Link>
 
-              {/*BOTON REGISTRO */}
-              {/* <Link
-                to={"/register"}
-                className="flex gap-2 mt-7 w-fit items-center mx-auto md:mx-0 cursor-pointer z-10 py-3 px-6 rounded-full 
+                {/*BOTON REGISTRO */}
+                <Link
+                  to={"/register"}
+                  className="flex gap-2 mt-7 w-fit items-center mx-auto md:mx-0 cursor-pointer z-10 py-3 px-6 rounded-full 
              hover:shadow-lg hover:scale-105 transform transition duration-300
              bg-gradient-to-r from-indigo-300 to-indigo-500 hover:bg-opacity-80"
-              >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  strokeWidth={1.5}
-                  stroke="white"
-                  className="w-6 h-6"
                 >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M6.827 6.175A2.31 2.31 0 015.186 7.23c-.38.054-.757.112-1.134.175C2.999 7.58 2.25 8.507 2.25 9.574V18a2.25 2.25 0 002.25 2.25h15A2.25 2.25 0 0021.75 18V9.574c0-1.067-.75-1.994-1.802-2.169a47.865 47.865 0 00-1.134-.175 2.31 2.31 0 01-1.64-1.055l-.822-1.316a2.192 2.192 0 00-1.736-1.039 48.774 48.774 0 00-5.232 0 2.192 2.192 0 00-1.736 1.039l-.821 1.316z"
-                  />
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M16.5 12.75a4.5 4.5 0 11-9 0 4.5 4.5 0 019 0zM18.75 10.5h.008v.008h-.008V10.5z"
-                  />
-                </svg>
-                <span className="text-white">Registarte</span>
-              </Link> */}
+                  {/* <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    strokeWidth={1.5}
+                    stroke="white"
+                    className="w-6 h-6"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="M6.827 6.175A2.31 2.31 0 015.186 7.23c-.38.054-.757.112-1.134.175C2.999 7.58 2.25 8.507 2.25 9.574V18a2.25 2.25 0 002.25 2.25h15A2.25 2.25 0 0021.75 18V9.574c0-1.067-.75-1.994-1.802-2.169a47.865 47.865 0 00-1.134-.175 2.31 2.31 0 01-1.64-1.055l-.822-1.316a2.192 2.192 0 00-1.736-1.039 48.774 48.774 0 00-5.232 0 2.192 2.192 0 00-1.736 1.039l-.821 1.316z"
+                    />
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="M16.5 12.75a4.5 4.5 0 11-9 0 4.5 4.5 0 019 0zM18.75 10.5h.008v.008h-.008V10.5z"
+                    />
+                  </svg> */}
+                  <span className="text-white text-lg font-bold">Registrate</span>
+                </Link>
+              </div>
             </div>
-
           </div>
         </div>
       </div>
