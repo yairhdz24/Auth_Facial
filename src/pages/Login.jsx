@@ -1,23 +1,22 @@
 import React, { useEffect, useRef, useState } from "react";
 import * as faceapi from "face-api.js";
-import AuthIdle from "../assets/images/auth-idle.svg";
-import AuthFace from "../assets/images/auth-face.svg";
 import Lottie from "react-lottie";
-import FaceAuth from "../assets/images/Face_Scaner1.json";
 import { Navigate, useLocation, useNavigate } from "react-router-dom";
 import ParticlesComponent from "../components/particles";
 import Check from "../assets/images/Check.json";
 import FaceScaner from "../assets/images/FaceScaner4.json";
+import supabase from "../../backend/supabaseConfig";
 
-function Login() {
-  const [tempAccount, setTempAccount] = useState("");
+
+export const Login = () => {
+  const [selectedAccount, setSelectedAccount] = useState(null);
   const [localUserStream, setLocalUserStream] = useState(null);
   const [modelsLoaded, setModelsLoaded] = useState(false);
   const [faceApiLoaded, setFaceApiLoaded] = useState(false);
   const [loginResult, setLoginResult] = useState("PENDING");
-  const [imageError, setImageError] = useState(false);
   const [counter, setCounter] = useState(10);
   const [labeledFaceDescriptors, setLabeledFaceDescriptors] = useState({});
+  const [imageError, setImageError] = useState(false);
   const videoRef = useRef();
   const canvasRef = useRef();
   const faceApiIntervalRef = useRef();
@@ -27,73 +26,67 @@ function Login() {
   const location = useLocation();
   const navigate = useNavigate();
 
-  if (!location?.state) {
+  if (!location?.state?.account) {
     return <Navigate to="/" replace={true} />;
   }
 
-  const loadModels = async () => {
+  useEffect(() => {
+    setSelectedAccount(location.state.account);
+  }, []);
 
-    await new Promise((resolve) => setTimeout(resolve, 10000)); //Tiempo de carga para los modelos
+  const loadModels = async () => {
+    await new Promise((resolve) => setTimeout(resolve, 10000)); // Tiempo de carga para los modelos 10 segundos
 
     const uri = "/models";
 
-    await faceapi.nets.ssdMobilenetv1.loadFromUri(uri);
-    await faceapi.nets.faceLandmark68Net.loadFromUri(uri);
-    await faceapi.nets.faceRecognitionNet.loadFromUri(uri);
+    await faceapi.nets.ssdMobilenetv1.loadFromUri(uri); // Cargar el modelo SSD MobileNet
+    await faceapi.nets.faceLandmark68Net.loadFromUri(uri); // Cargar el modelo de landmarks
+    await faceapi.nets.faceRecognitionNet.loadFromUri(uri); // Cargar el modelo de reconocimiento facial
   };
 
   useEffect(() => {
-    setTempAccount(location?.state?.account);
-  }, []);
-  useEffect(() => {
-    if (tempAccount) {
+    if (selectedAccount) {
       loadModels()
         .then(async () => {
-          const labeledFaceDescriptors = await loadLabeledImages();
-          setLabeledFaceDescriptors(labeledFaceDescriptors);
+          const labeledFaceDescriptors = await loadLabeledImages(selectedAccount); // Cargar las imagenes de los usuarios para el reconocimiento facial
+          setLabeledFaceDescriptors(labeledFaceDescriptors); 
         })
-        .then(() => setModelsLoaded(true));
+        .then(() => setModelsLoaded(true))
+        .catch(error => console.error("Error loading models:", error));
     }
-  }, [tempAccount]);
+  
+    return () => {
+      clearInterval(faceApiIntervalRef.current);
+    };
+  }, [selectedAccount]);
 
   useEffect(() => {
     if (loginResult === "SUCCESS") {
       const counterInterval = setInterval(() => {
-        setCounter((counter) => counter - 1);
-      }, 1000);
+        setCounter((counter) => counter - 1); // Contador para el reconocimiento del rostro de la tabla de descriptores
+      }, 1000); 
 
       if (counter === 0) {
         videoRef.current.pause();
         videoRef.current.srcObject = null;
-        localUserStream.getTracks().forEach((track) => {
+        localUserStream.getTracks().forEach((track) => { // Detener el video 
           track.stop();
         });
         clearInterval(counterInterval);
         clearInterval(faceApiIntervalRef.current);
         localStorage.setItem(
           "faceAuth",
-          JSON.stringify({ status: true, account: tempAccount })
-        );
-        navigate("/protected", { replace: true });
+          JSON.stringify({ status: true, account: selectedAccount })
+        ); 
+        navigate("/HomePage", { replace: true }); // Redirigir a la pagina protegida
       }
 
       return () => clearInterval(counterInterval);
     }
     setCounter(5);  // Tiempo para el reconocer el rostro
   }, [loginResult, counter]);
-
-  const getLocalUserVideo = async () => {
-    navigator.mediaDevices
-      .getUserMedia({ audio: false, video: true })
-      .then((stream) => {
-        videoRef.current.srcObject = stream;
-        setLocalUserStream(stream);
-      })
-      .catch((err) => {
-        console.error("error:", err);
-      });
-  };
-
+  
+  
   const scanFace = async () => {
     faceapi.matchDimensions(canvasRef.current, videoRef.current);
     const faceApiInterval = setInterval(async () => {
@@ -105,84 +98,94 @@ function Login() {
         width: videoWidth,
         height: videoHeight,
       });
-
-      const faceMatcher = new faceapi.FaceMatcher(labeledFaceDescriptors);
-
-      const results = resizedDetections.map((d) =>
+  
+      if (!labeledFaceDescriptors.length) {
+        console.error("No hay descriptores de rostros cargados.");
+        return;
+      }
+  
+      const faceMatcher = new faceapi.FaceMatcher(labeledFaceDescriptors); // UMBRALIZATION del faceMatcher
+  
+      const results = resizedDetections.map((d) => 
         faceMatcher.findBestMatch(d.descriptor)
       );
-
+  
       if (!canvasRef.current) {
         return;
       }
-
-      canvasRef.current
-        .getContext("2d")
-        .clearRect(0, 0, videoWidth, videoHeight);
+  
+      canvasRef.current.getContext("2d").clearRect(0, 0, videoWidth, videoHeight); // Limpiar el canvas antes de dibujar 
       faceapi.draw.drawDetections(canvasRef.current, resizedDetections);
       faceapi.draw.drawFaceLandmarks(canvasRef.current, resizedDetections);
-
-      if (results.length > 0 && tempAccount.id === results[0].label) {
-        setLoginResult("SUCCESS");
-      } else {
-        setLoginResult("FAILED");
+  
+      if (results.length > 0) {
+        // console.log("Resultados de detección facial:", results); //depuracion para ver el label y la distancia del rostro
+        if (results[0].label !== "unknown" && results[0].distance < 0.5) {
+          setLoginResult("SUCCESS");
+        } else {
+          setLoginResult("FAILED");
+        }
       }
-
+  
       if (!faceApiLoaded) {
         setFaceApiLoaded(true);
       }
     }, 1000 / 15);
-    faceApiIntervalRef.current = faceApiInterval;
+    faceApiIntervalRef.current = faceApiInterval; // Guardar la referencia del intervalo en el useRef inicializado
   };
 
-  async function loadLabeledImages() {
-    if (!tempAccount) {
+  const getLocalUserVideo = async () => { 
+    navigator.mediaDevices
+      .getUserMedia({ audio: false, video: true })
+      .then((stream) => {
+        videoRef.current.srcObject = stream;
+        setLocalUserStream(stream);
+      })
+      .catch((err) => {
+        console.error("error:", err);
+      });
+  };
+
+  async function loadLabeledImages(account) { //funcion para cargar las imagenes de los usuarios
+    if (!account) {
       return null;
     }
     const descriptions = [];
 
-    let img;
-
     try {
-      const imgPath =
-        tempAccount?.type === "CUSTOM"
-          ? tempAccount.picture
-          : // : import.meta.env.DEV
-          // ? `/temp-accounts/${tempAccount.picture}`
-          // : `/react-face-auth/temp-accounts/${tempAccount.picture}`;
-          `/temp-accounts/${tempAccount.picture}`;
+      const { data: userData, error } = await supabase  //peticion en la bd se supabase para extraer el id del usuario
+        .from("users2")
+        .select("pictureFileName")
+        .eq("id", account.id)
+        .single();
 
-      img = await faceapi.fetchImage(imgPath);
-    } catch {
+      if (error) {
+        throw error;
+      }
+
+      const imgFileName = userData.pictureFileName;
+      // console.log("Nombre de archivo de imagen:", imgFileName); //depuracion para ver el nombre de la imagen
+
+      const response = await fetch(`https://cfdrkjqgibsxervlmzpr.supabase.co/storage/v1/object/public/images/${imgFileName}`); //peticion para obtener la imagen del usuario del bucket
+      const blob = await response.blob();
+      const img = await faceapi.bufferToImage(blob);
+      // console.log("Imagen cargada en FaceAPI:", img); //depuracion para ver la imagen cargada
+
+      const detections = await faceapi
+        .detectSingleFace(img)
+        .withFaceLandmarks()
+        .withFaceDescriptor();
+
+      if (detections) {
+        descriptions.push(new faceapi.LabeledFaceDescriptors(account.id.toString(), [detections.descriptor])); //almacenar los descriptores de los rostros en un arreglo
+      }
+    } catch (error) {
+      console.error("Error loading image:", error);
       setImageError(true);
-      return;
+      return null;
     }
 
-    const detections = await faceapi
-      .detectSingleFace(img)
-      .withFaceLandmarks()
-      .withFaceDescriptor();
-
-    if (detections) {
-      descriptions.push(detections.descriptor);
-    }
-
-    return new faceapi.LabeledFaceDescriptors(tempAccount.id, descriptions);
-  }
-
-  if (imageError) {
-    return (
-      <div className="min-h-screen flex flex-col items-center justify-center gap-[24px] max-w-[840px] mx-auto">
-        <h2 className="text-center text-3xl font-extrabold tracking-tight text-rose-700 sm:text-4xl">
-          <span className="block">
-            ¡Ups! No hay ninguna imagen de perfil asociada con esta cuenta.
-          </span>
-        </h2>
-        <span className="block mt-4">
-          Comuníquese con la administración para registrarse o vuelva a intentarlo más tarde.
-        </span>
-      </div>
-    );
+    return descriptions.length > 0 ? descriptions : null; //retornar los descriptores de los rostros 
   }
 
   return (
@@ -218,7 +221,7 @@ function Login() {
         {/* Pagina cuando das a escanear El Rostro  SI SE RECONOCE EL ROSTRO*/}
         {localUserStream && loginResult === "SUCCESS" && (
           <h2 className="text-center text-3xl font-extrabold tracking-tight text-gray-900 sm:text-4xl">
-            <span className="block text-indigo-600 mt-10">
+            <span className="block text-indigo-600 ">
               ¡Hemos reconocido tu cara con éxito!
             </span>
             <span className="block text-indigo-600 mb-5">
@@ -231,7 +234,7 @@ function Login() {
         {localUserStream && loginResult === "FAILED" && (
           <h2 className="text-center text-3xl font-extrabold tracking-tight text-rose-700 sm:text-4xl">
             <span className="block mt-[20px] mb-10">
-              ¡Ups! No se puede reconocer tu cara.
+              ¡Ups! No se puede reconocer tu rostro :{"("}.
             </span>
           </h2>
         )}
@@ -276,7 +279,7 @@ function Login() {
 
               {/* Pantalla de Cargando los modelos */}
               {modelsLoaded ? (
-                <div className="">
+                <div>
 
                   <Lottie style={{ pointerEvents: 'none' }}
                     options={{
@@ -349,5 +352,3 @@ function Login() {
     </div>
   );
 }
-
-export default Login;
