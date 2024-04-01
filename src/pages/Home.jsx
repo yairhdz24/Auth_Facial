@@ -45,7 +45,6 @@ export const Home = () => {
                 facial, desarrollada utilizando React e inteligencia Atificial de Reconocimiento facial.
                 El principal objetivo de la aplicación es ofrecer un sistema de autenticación
                 confiable y eficiente mediante el análisis y la verificación de las características faciales del usuario.
-                
               </p>
               <div className="flex gap-4">
                 <Link
