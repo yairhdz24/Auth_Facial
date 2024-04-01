@@ -13,7 +13,7 @@ FaceAuthenticator es una aplicación web de autenticación basada en reconocimie
 - **Interfaz de Usuario Intuitiva:** La aplicación proporciona una interfaz de usuario simple y fácil de usar para el registro y la autenticación de usuarios.
 
 
-# 🛠️ Tecnologías Utilizadas
+## 🛠️ Tecnologías Utilizadas
 
 - [![Face-api.js](https://img.shields.io/badge/Face--api.js-%23000?style=for-the-badge&logo=javascript&logoColor=white)](https://github.com/justadudewhohacks/face-api.js)
 - [![Supabase](https://img.shields.io/badge/Supabase-%2300B289?style=for-the-badge&logo=supabase&logoColor=white)](https://supabase.io/)
@@ -26,6 +26,24 @@ FaceAuthenticator es una aplicación web de autenticación basada en reconocimie
 
 Puedes ver una demostración en vivo [aquí](link).
 
-# Team 🛠️
+## 🚀 Guía de Despliegue
+ ### 1. Clonar el Repositorio
+Primero, clona el repositorio a tu máquina local utilizando el siguiente comando:
+
+```bash
+  git clone https://github.com/yairhdz24/FaceAuthenticator.git
+```
+
+### 2. Instalar Dependencias
+Accede al directorio de tu proyecto y ejecuta el siguiente comando para instalar todas las dependencias necesarias:
+
+```bash
+  cd FaceAuthenticator
+  npm install
+  npm start
+```
+    
+
+## Team 🛠️
 - Yair Hernandez Ochoa
 - Judith Baudelia Villalvazo Marin
