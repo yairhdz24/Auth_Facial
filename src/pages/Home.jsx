@@ -32,6 +32,7 @@ export const Home = () => {
 
                 />
               </div>
+              {/* PRUEBA COMENTARIO */}
               {/* <img src={Logo} alt="" className="h-40 mb-2" /> */}
               <h1 className="text-5xl font-bold text-white mb-5 text-center md:text-left" style={{ textShadow: "3px 4px 8px rgba(0, 0, 0, 0.2)" }}>
                 Bienvenido a
