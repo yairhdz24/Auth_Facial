@@ -3,7 +3,7 @@ import { RadioGroup } from "@headlessui/react";
 import { Link } from "react-router-dom";
 import ParticlesComponent from "../components/particles";
 import supabase from "../../backend/supabaseConfig";
-import { Skeleton } from "./skeleton";
+import { Skeleton } from "../components/Skeleton";
 
 export const UserSelect = () => {
   const [selected, setSelected] = useState(null);

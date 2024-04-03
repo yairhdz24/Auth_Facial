@@ -7,9 +7,11 @@ export default defineConfig(({ command }) => {
     plugins: [react()],
     base: "/",
   };
-
+  
+  
   // if (command !== "serve") {
   //   config.base = "/react-face-auth/";
+
   // }
 
   return config;
