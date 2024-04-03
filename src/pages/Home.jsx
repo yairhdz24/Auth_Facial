@@ -40,12 +40,19 @@ export const Home = () => {
               text-transparent bg-gradient-to-r from-cyan-400 to-indigo-300" style={{ textShadow: "3px 3px 3px rgba(0, 255, 255, 0.4)" }}>
                 FaceAuthenticator
               </h1>
-              <p className="mt-8 text-md text-white max-w-3xl mx-4 md:mx-0 lg:mx-auto bg-gray-800 p-6 rounded-lg">
-                FaceAuthenticator es una aplicación web de autenticación basada en reconocimiento
-                facial, desarrollada utilizando React e inteligencia Atificial de Reconocimiento facial.
-                El principal objetivo de la aplicación es ofrecer un sistema de autenticación
-                confiable y eficiente mediante el análisis y la verificación de las características faciales del usuario.
-              </p>
+              <div className="mt-8 text-md text-white max-w-3xl mx-4 md:mx-0 lg:mx-auto bg-gray-800 p-6 rounded-lg">
+                <p>
+                  FaceAuthenticator es una aplicación web de autenticación basada en reconocimiento
+                  facial, desarrollada utilizando React e inteligencia artificial de reconocimiento facial.
+                </p>
+
+                <p>
+                  El objetivo principal de la aplicación es ofrecer un sistema de autenticación
+                  confiable y eficiente mediante el análisis y la verificación de las características faciales del usuario.
+                  </p>
+                
+                
+              </div>
               <div className="flex gap-4">
                 <Link
                   to={"/user-select"}
@@ -72,7 +79,7 @@ export const Home = () => {
                       d="M16.5 12.75a4.5 4.5 0 11-9 0 4.5 4.5 0 019 0zM18.75 10.5h.008v.008h-.008V10.5z"
                     />
                   </svg> */}
-                  <span className="text-white text-lg font-bold">Iniciar Sesion</span>
+                  <span className="text-white text-lg font-bold">Iniciar Sesión</span>
                 </Link>
 
                 {/*BOTON REGISTRO */}
@@ -101,7 +108,7 @@ export const Home = () => {
                       d="M16.5 12.75a4.5 4.5 0 11-9 0 4.5 4.5 0 019 0zM18.75 10.5h.008v.008h-.008V10.5z"
                     />
                   </svg> */}
-                  <span className="text-white text-lg font-bold">Registrate</span>
+                  <span className="text-white text-lg font-bold">Registrarse</span>
                 </Link>
               </div>
             </div>
