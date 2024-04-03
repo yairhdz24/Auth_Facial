@@ -20,14 +20,14 @@ export const Home = () => {
             />
           </div> */}
             <div className="md:order-1 z-10 flex flex-col items-center md:items-center mb">
-              <div className="mb-5" style={{ pointerEvents: 'none' }}>
+              <div className="mb-5 d-flex justify-content-center" style={{ pointerEvents: 'none' }}>
                 <Lottie
                   options={{
                     animationData: FaceAuth,
                     loop: true,
                     autoplay: true,
                   }}
-                  height={300}
+                  height={150}
                   width={300}
 
                 />
