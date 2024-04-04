@@ -43,6 +43,8 @@ Accede al directorio de tu proyecto y ejecuta el siguiente comando para instalar
   npm start
 ```
     
+## 🚀 ¿Cómo funciona?
+  ### Home Page
 
 ## Team 🛠️
 - Yair Hernandez Ochoa
