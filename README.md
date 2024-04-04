@@ -43,7 +43,7 @@ Accede al directorio de tu proyecto y ejecuta el siguiente comando para instalar
   npm start
 ```
     
-## 🚀 ¿Cómo funciona?
+## ¿Cómo funciona?
   ### Página de inicio
   Al ingresar a la página de nuestro proyecto lo primero que veremos sera la página de inicio o home page, esta contiene un pequeño resumen acerca del proyecto, los botones para iniciar sesión y registrarse, y en la parte de abajo se encuentra el footer, el cual contiene información sobre nosotros como nuestras cuentas de github, y además ahí podemos encontrar el link al repositorio.
   
