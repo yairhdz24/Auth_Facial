@@ -24,7 +24,7 @@ FaceAuthenticator es una aplicación web de autenticación basada en reconocimie
 
 ## 🚀 Demostración
 
-Puedes ver una demostración en vivo [aquí](link).
+Puedes ver una demostración en vivo [aquí](https://faceauthenticator.netlify.app/).
 
 ## 🚀 Guía de Despliegue
  ### 1. Clonar el Repositorio
@@ -45,6 +45,7 @@ Accede al directorio de tu proyecto y ejecuta el siguiente comando para instalar
     
 ## 🚀 ¿Cómo funciona?
   ### Home Page
+  ![Captura de pantalla 2024-04-03 194157](https://github.com/judith-vm/MiCV/assets/157530840/4bf3166a-3d51-4dc5-a8fd-532fb3cbd8b0)
 
 ## Team 🛠️
 - Yair Hernandez Ochoa
