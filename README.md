@@ -52,8 +52,23 @@ Accede al directorio de tu proyecto y ejecuta el siguiente comando para instalar
 ![Captura de pantalla 2024-04-03 194845](https://github.com/judith-vm/MiCV/assets/157530840/e8343ffc-212a-4638-bd3b-6da7b4aaa950)
 
  ### Iniciar Sesión
- ![Captura de pantalla 2024-04-03 195026](https://github.com/judith-vm/MiCV/assets/157530840/1b5fbfd8-e2a1-4b99-960f-a1caf7cc5a0f)
 
+ ![Captura de pantalla 2024-04-03 195227](https://github.com/judith-vm/MiCV/assets/157530840/68913c42-40d4-43d2-af35-d0761d159b94)
+
+ ### Cargando modelos
+ 
+![Captura de pantalla 2024-04-03 195451](https://github.com/judith-vm/MiCV/assets/157530840/9da2e54c-1ffe-4024-bd7a-20da204f9f71)
+
+ ### Escanear rostro
+![Captura de pantalla 2024-04-03 195543](https://github.com/judith-vm/MiCV/assets/157530840/777f7e27-41e2-4778-87eb-debc4a7f4b1e)
+
+### Reconocimiento facial
+![Captura de pantalla 2024-04-03 195722](https://github.com/judith-vm/MiCV/assets/157530840/5a2058e0-9e01-473a-a766-4c7d0af33f33)
+
+### Inicio de sesión exitoso
+![Captura de pantalla 2024-04-03 195901](https://github.com/judith-vm/MiCV/assets/157530840/0c6e0e8e-c9ac-45d4-b770-2fcfa1dd34e1)
+
+ 
 ## Team 🛠️
 - Yair Hernandez Ochoa
 - Judith Baudelia Villalvazo Marin
