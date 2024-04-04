@@ -47,6 +47,13 @@ Accede al directorio de tu proyecto y ejecuta el siguiente comando para instalar
   ### Home Page
   ![Captura de pantalla 2024-04-03 194157](https://github.com/judith-vm/MiCV/assets/157530840/4bf3166a-3d51-4dc5-a8fd-532fb3cbd8b0)
 
+  ### Registrarse
+  
+![Captura de pantalla 2024-04-03 194845](https://github.com/judith-vm/MiCV/assets/157530840/e8343ffc-212a-4638-bd3b-6da7b4aaa950)
+
+ ### Iniciar Sesión
+ ![Captura de pantalla 2024-04-03 195026](https://github.com/judith-vm/MiCV/assets/157530840/1b5fbfd8-e2a1-4b99-960f-a1caf7cc5a0f)
+
 ## Team 🛠️
 - Yair Hernandez Ochoa
 - Judith Baudelia Villalvazo Marin
