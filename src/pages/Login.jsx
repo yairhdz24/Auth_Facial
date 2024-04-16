@@ -83,7 +83,7 @@ export const Login = () => {
 
       return () => clearInterval(counterInterval);
     }
-    setCounter(5);  // Tiempo para el reconocer el rostro
+    setCounter(3);  // Tiempo para el reconocer el rostro
   }, [loginResult, counter]);
   
   
