@@ -190,7 +190,7 @@ export const Login = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-tl from-blue-700 to-indigo-900 flex flex-col items-center justify-center">
-      <ParticlesComponent id="particles-background" />
+      {/*<ParticlesComponent id="particles-background" />*/}
       <div className="h-auto mt-30 flex flex-col items-center justify-center bg-white py-4 px-4 
      md:py-8 md:px-10 max-w-screen-lg mx-auto rounded-2xl shadow-xl mb-8 z-10 ">
 
